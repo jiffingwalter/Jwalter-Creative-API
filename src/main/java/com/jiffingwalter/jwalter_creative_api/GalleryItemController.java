@@ -9,10 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/get-gallery-items")
 public class GalleryItemController {
+    private final GalleryItemService galleryItemService;
 
+    public GalleryItemController(GalleryItemService galleryItemService){
+        this.galleryItemService = galleryItemService;
+    }
+    
     @GetMapping
     public List<GalleryItem> getGalleryItems(){
-        return this.generateMockList();
+        return galleryItemService.getAllGalleryItems();
+        //return this.generateMockList();
     }
     
     public List<GalleryItem> generateMockList(){

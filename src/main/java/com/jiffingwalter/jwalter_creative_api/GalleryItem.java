@@ -2,15 +2,29 @@ package com.jiffingwalter.jwalter_creative_api;
 
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "gallery_item")
 public class GalleryItem {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String title;
     private String description;
     private String urlPath;
-    private int dateUploaded;
-    private int dateCreated;
+    private Integer dateUploaded;
+    private Integer dateCreated;
 
-    public GalleryItem(int id, String title, String description, String urlPath, int dateUploaded, int dateCreated){
+    public GalleryItem(){
+    }
+
+    public GalleryItem(Integer id, String title, String description, String urlPath, Integer dateUploaded, Integer dateCreated){
         this.id = id;
         this.title = title;
         this.description = description;
@@ -19,10 +33,10 @@ public class GalleryItem {
         this.dateCreated = dateCreated;
     }
 
-    public int getId(){
+    public Integer getId(){
         return this.id;
     }
-    public int setId(int id){
+    public Integer setId(Integer id){
         return this.id = id;
     }
     public String getTitle(){
@@ -43,16 +57,16 @@ public class GalleryItem {
     public String setUrlPath(String urlPath){
         return this.urlPath = urlPath;
     }
-    public int getDateUploaded(){
+    public Integer getDateUploaded(){
         return this.dateUploaded;
     }
-    public int setDateUploaded(int dateUploaded){
+    public Integer setDateUploaded(Integer dateUploaded){
         return this.dateUploaded = dateUploaded;
     }
-    public int getDateCreated(){
+    public Integer getDateCreated(){
         return this.dateUploaded;
     }
-    public int setDateCreated(int dateCreated){
+    public Integer setDateCreated(Integer dateCreated){
         return this.dateCreated = dateCreated;
     }
 
