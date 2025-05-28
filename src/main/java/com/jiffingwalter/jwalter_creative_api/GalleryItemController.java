@@ -1,6 +1,7 @@
 package com.jiffingwalter.jwalter_creative_api;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,33 +28,29 @@ public class GalleryItemController {
                 1,
                 "Test 1",
                 "Yo momma",
-                "https://google.com",
-                0,
-                0
+                LocalDateTime.of(2025,05,27,0,0,0),
+                LocalDateTime.of(2025,05,27,0,0,0)
             ),
             new GalleryItem(
                 2,
                 "Test 2",
                 "Yo momma",
-                "https://google.com",
-                0,
-                0
+                LocalDateTime.of(2025,05,27,0,0,0),
+                LocalDateTime.of(2025,05,27,0,0,0)
             ),
             new GalleryItem(
                 2,
                 "Test 3",
                 "Yo momma",
-                "https://google.com",
-                0,
-                0
+                LocalDateTime.of(2025,05,27,0,0,0),
+                LocalDateTime.of(2025,05,27,0,0,0)
             ),
             new GalleryItem(
                 2,
                 "Test 4",
                 "Yo momma",
-                "https://google.com",
-                0,
-                0
+                LocalDateTime.of(2025,05,27,0,0,0),
+                LocalDateTime.of(2025,05,27,0,0,0)
             )
         );
     }

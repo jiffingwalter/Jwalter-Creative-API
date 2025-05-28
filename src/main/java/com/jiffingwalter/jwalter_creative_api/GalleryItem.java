@@ -1,6 +1,7 @@
 package com.jiffingwalter.jwalter_creative_api;
 
 import java.util.Objects;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,18 +18,16 @@ public class GalleryItem {
 
     private String title;
     private String description;
-    private String urlPath;
-    private Integer dateUploaded;
-    private Integer dateCreated;
+    private LocalDateTime dateUploaded;
+    private LocalDateTime dateCreated;
 
     public GalleryItem(){
     }
 
-    public GalleryItem(Integer id, String title, String description, String urlPath, Integer dateUploaded, Integer dateCreated){
+    public GalleryItem(Integer id, String title, String description, LocalDateTime dateUploaded, LocalDateTime dateCreated){
         this.id = id;
         this.title = title;
         this.description = description;
-        this.urlPath = urlPath;
         this.dateUploaded = dateUploaded;
         this.dateCreated = dateCreated;
     }
@@ -51,22 +50,16 @@ public class GalleryItem {
     public String setDescription(String description){
         return this.description = description;
     }
-    public String getUrlPath(){
-        return this.urlPath;
-    }
-    public String setUrlPath(String urlPath){
-        return this.urlPath = urlPath;
-    }
-    public Integer getDateUploaded(){
+    public LocalDateTime getDateUploaded(){
         return this.dateUploaded;
     }
-    public Integer setDateUploaded(Integer dateUploaded){
+    public LocalDateTime setDateUploaded(LocalDateTime dateUploaded){
         return this.dateUploaded = dateUploaded;
     }
-    public Integer getDateCreated(){
+    public LocalDateTime getDateCreated(){
         return this.dateUploaded;
     }
-    public Integer setDateCreated(Integer dateCreated){
+    public LocalDateTime setDateCreated(LocalDateTime dateCreated){
         return this.dateCreated = dateCreated;
     }
 
@@ -79,7 +72,6 @@ public class GalleryItem {
             Objects.equals(id, that.id) && 
             Objects.equals(title, that.title) &&
             Objects.equals(description, that.description) && 
-            Objects.equals(urlPath, that.urlPath) && 
             Objects.equals(dateUploaded, that.dateUploaded) && 
             Objects.equals(dateCreated, that.dateCreated)
             );
@@ -87,6 +79,6 @@ public class GalleryItem {
 
     @Override
     public int hashCode(){
-        return Objects.hash(id, title, description, urlPath, dateUploaded, dateCreated);
+        return Objects.hash(id, title, description, dateUploaded, dateCreated);
     }
 }

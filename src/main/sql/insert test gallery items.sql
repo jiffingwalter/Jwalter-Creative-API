@@ -1,0 +1,3 @@
+insert into gallery_item (title,description,date_uploaded,date_created) values ('gallery item 1','sample description','2025-05-28 16:00:00','2025-05-28 16:00:00');
+insert into gallery_item (title,description,date_uploaded,date_created) values ('gallery item 2','sample description','2025-05-28 16:00:00','2025-05-28 16:00:00');
+insert into gallery_item (title,description,date_uploaded,date_created) values ('gallery item 3','sample description','2025-05-28 16:00:00','2025-05-28 16:00:00');
