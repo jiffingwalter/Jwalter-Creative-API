@@ -1,6 +1,7 @@
 package com.jiffingwalter.jwalter_creative_api;
 
 import java.util.Objects;
+import java.util.UUID;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -13,8 +14,8 @@ import jakarta.persistence.Table;
 @Table(name = "gallery_item")
 public class GalleryItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String title;
     private String description;
@@ -24,18 +25,18 @@ public class GalleryItem {
     public GalleryItem(){
     }
 
-    public GalleryItem(Integer id, String title, String description, LocalDateTime dateUploaded, LocalDateTime dateCreated){
-        this.id = id;
+    public GalleryItem(String title, String description, LocalDateTime dateUploaded, LocalDateTime dateCreated){
+        //this.id = id;
         this.title = title;
         this.description = description;
         this.dateUploaded = dateUploaded;
         this.dateCreated = dateCreated;
     }
 
-    public Integer getId(){
+    public UUID getId(){
         return this.id;
     }
-    public Integer setId(Integer id){
+    public UUID setId(UUID id){
         return this.id = id;
     }
     public String getTitle(){

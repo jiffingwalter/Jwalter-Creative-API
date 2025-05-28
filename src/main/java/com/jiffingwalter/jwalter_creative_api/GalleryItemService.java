@@ -1,6 +1,8 @@
 package com.jiffingwalter.jwalter_creative_api;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,13 @@ public class GalleryItemService {
 
     public List<GalleryItem> getAllGalleryItems(){
         return galleryItemRepository.findAll();
+    }
+
+    public GalleryItem insertGalleryItem(GalleryItem newGalleryItem) {
+        return this.galleryItemRepository.save(newGalleryItem);
+    }
+
+    public Optional<GalleryItem> getGalleryItemById(UUID id) {
+        return this.galleryItemRepository.findById(id);
     }
 }
