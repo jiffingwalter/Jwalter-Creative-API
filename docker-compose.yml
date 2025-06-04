@@ -14,6 +14,19 @@ services:
       - db
     restart: unless-stopped
 
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5332/jwaltercreative
+      SPRING_DATASOURCE_USERNAME: justoni
+      SPRING_DATASOURCE_PASSWORD: supersecretpassword
+
 networks:
   db:
     driver: bridge
