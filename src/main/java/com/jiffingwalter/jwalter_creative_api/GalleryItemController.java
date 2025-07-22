@@ -54,17 +54,21 @@ public class GalleryItemController {
                         "Gallery item 1",
                         "Sample description 1",
                         LocalDateTime.of(2025, 03, 01, 0, 0, 0),
-                        LocalDateTime.of(2025, 03, 01, 0, 0, 0)),
+                        LocalDateTime.of(2025, 03, 01, 0, 0, 0)
+                        ),
                 new GalleryItem(
                         "Gallery item 2",
                         "Sample description 2",
                         LocalDateTime.of(2025, 04, 01, 0, 0, 0),
-                        LocalDateTime.of(2025, 04, 01, 0, 0, 0)),
+                        LocalDateTime.of(2025, 04, 01, 0, 0, 0)
+                        ),
                 new GalleryItem(
                         "Gallery item 3",
                         "Sample description 3",
                         LocalDateTime.of(2025, 05, 01, 0, 0, 0),
-                        LocalDateTime.of(2025, 05, 01, 0, 0, 0)));
+                        LocalDateTime.of(2025, 05, 01, 0, 0, 0)
+                        )
+                        );
 
         return response;
     }
