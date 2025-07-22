@@ -3,8 +3,8 @@ services:
     container_name: postgres
     image: postgres:latest
     environment:
-      POSTGRES_USER: justoni
-      POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       PGDATA: /data/postgres
     volumes:
       - db:/data/postgres
@@ -24,8 +24,8 @@ services:
       - db
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5332/jwaltercreative
-      SPRING_DATASOURCE_USERNAME: justoni
-      SPRING_DATASOURCE_PASSWORD: supersecretpassword
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
 
 networks:
   db:
