@@ -1,4 +1,4 @@
-package com.jiffingwalter.jwalter_creative_api;
+package com.jiffingwalter.jwalter_creative_api.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.jiffingwalter.jwalter_creative_api.entities.GalleryItem;
+import com.jiffingwalter.jwalter_creative_api.services.GalleryItemService;
 
 @RestController
 @RequestMapping("api/v1/get-gallery-items")

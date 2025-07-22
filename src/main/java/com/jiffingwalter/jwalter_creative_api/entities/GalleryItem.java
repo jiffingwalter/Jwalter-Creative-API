@@ -1,4 +1,4 @@
-package com.jiffingwalter.jwalter_creative_api;
+package com.jiffingwalter.jwalter_creative_api.entities;
 
 import java.util.Objects;
 import java.util.UUID;
