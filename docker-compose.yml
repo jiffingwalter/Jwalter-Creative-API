@@ -5,6 +5,7 @@ services:
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: jwaltercreative
       PGDATA: /data/postgres
     volumes:
       - db:/data/postgres
@@ -23,7 +24,7 @@ services:
     networks:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5332/jwaltercreative
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/jwaltercreative
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
 
