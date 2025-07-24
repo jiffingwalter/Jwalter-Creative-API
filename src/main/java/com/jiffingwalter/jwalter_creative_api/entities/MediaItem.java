@@ -1,40 +1,39 @@
 package com.jiffingwalter.jwalter_creative_api.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
-import java.time.LocalDateTime;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "gallery_item")
-public class GalleryItem {
+@Table(name = "media_item")
+public class MediaItem {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private String title;
-    private String description;
+    private String extention;
+    private String type;
     private LocalDateTime loadDate;
-    private LocalDateTime postDate;
 
-    @OneToMany(mappedBy = "parentItem", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MediaItem> content = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "gallery_item_id")
+    private GalleryItem parentItem;
 
-    public GalleryItem(){}
-    public GalleryItem(String title, String description, LocalDateTime loadDate, LocalDateTime postDate){
+    public MediaItem(){}
+    public MediaItem(String title, String extention, String type, LocalDateTime loadDate){
         this.title = title;
-        this.description = description;
+        this.extention = extention;
+        this.type = type;
         this.loadDate = loadDate;
-        this.postDate = postDate;
     }
 
     public UUID getId(){
@@ -43,47 +42,51 @@ public class GalleryItem {
     public UUID setId(UUID id){
         return this.id = id;
     }
+
     public String getTitle(){
         return this.title;
     }
     public String setTitle(String title){
         return this.title = title;
     }
-    public String getDescription(){
-        return this.description;
+
+    public String getExtention(){
+        return this.extention;
     }
-    public String setDescription(String description){
-        return this.description = description;
+    public String setExtention(String extention){
+        return this.extention = extention;
     }
+
+    public String getType(){
+        return this.type;
+    }
+    public String setType(String type){
+        return this.type = type;
+    }
+
     public LocalDateTime getLoadDate(){
         return this.loadDate;
     }
     public LocalDateTime setLoadDate(LocalDateTime loadDate){
         return this.loadDate = loadDate;
     }
-    public LocalDateTime getPostDate(){
-        return this.postDate;
-    }
-    public LocalDateTime setPostDate(LocalDateTime postDate){
-        return this.postDate = postDate;
-    }
 
     @Override
     public boolean equals(Object in){
         if (in == null || getClass() != in.getClass())
             return false;
-        GalleryItem that = (GalleryItem) in;
+        MediaItem that = (MediaItem) in;
         return (
             Objects.equals(id, that.id) && 
             Objects.equals(title, that.title) &&
-            Objects.equals(description, that.description) && 
-            Objects.equals(loadDate, that.loadDate) && 
-            Objects.equals(postDate, that.postDate)
+            Objects.equals(extention, that.extention) && 
+            Objects.equals(type, that.type) && 
+            Objects.equals(loadDate, that.loadDate)
             );
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(id, title, description, loadDate, postDate);
+        return Objects.hash(id, title, extention, type, loadDate);
     }
 }

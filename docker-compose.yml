@@ -5,7 +5,6 @@ services:
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: jwaltercreative
       PGDATA: /data/postgres
     volumes:
       - db:/data/postgres

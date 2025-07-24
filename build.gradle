@@ -31,6 +31,7 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+// Parse in .env variables 
 bootRun {
     doFirst {
         def envFile = file('.env')
