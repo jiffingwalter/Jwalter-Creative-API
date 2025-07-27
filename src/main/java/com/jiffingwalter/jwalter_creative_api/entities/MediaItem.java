@@ -8,8 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,9 +23,8 @@ public class MediaItem {
     private String type;
     private LocalDateTime loadDate;
 
-    @ManyToOne
-    @JoinColumn(name = "gallery_item_id")
-    private GalleryItem parentItem;
+    @ManyToMany(mappedBy = "content")
+    private GalleryItem parentGalleryItem;
 
     public MediaItem(){}
     public MediaItem(String title, String extention, String type, LocalDateTime loadDate){

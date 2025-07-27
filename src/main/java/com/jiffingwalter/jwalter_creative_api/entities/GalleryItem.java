@@ -1,17 +1,20 @@
 package com.jiffingwalter.jwalter_creative_api.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,8 +29,18 @@ public class GalleryItem {
     private LocalDateTime loadDate;
     private LocalDateTime postDate;
 
-    @OneToMany(mappedBy = "parentItem", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MediaItem> content = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+        name = "gallery_item_media",
+        joinColumns = @JoinColumn(name = "gallery_item_id"),
+        inverseJoinColumns = @JoinColumn(name = "media_item_id")
+    )
+    private List<MediaItem> content;
+
+    @ElementCollection
+    @CollectionTable(name = "gallery_item_tags", joinColumns = @JoinColumn(name = "gallery_item_id"))
+    @Column(name = "tag")
+    private List<String> tags;
 
     public GalleryItem(){}
     public GalleryItem(String title, String description, LocalDateTime loadDate, LocalDateTime postDate){
