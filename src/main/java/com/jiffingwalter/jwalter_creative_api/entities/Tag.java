@@ -1,12 +1,13 @@
 package com.jiffingwalter.jwalter_creative_api.entities;
 
+// import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+// import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,8 +19,8 @@ public class Tag{
 
     private String name;
 
-    @ManyToMany(mappedBy = "tags")
-    private GalleryItem galleryItem;
+    // @ManyToMany(mappedBy = "tags")
+    // private List<GalleryItem> galleryItems;
 
     public Tag(){}
     public Tag(String nameIn){

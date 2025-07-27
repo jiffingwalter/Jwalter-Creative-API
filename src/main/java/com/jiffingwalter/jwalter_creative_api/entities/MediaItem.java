@@ -1,6 +1,7 @@
 package com.jiffingwalter.jwalter_creative_api.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class MediaItem {
     private LocalDateTime loadDate;
 
     @ManyToMany(mappedBy = "content")
-    private GalleryItem parentGalleryItem;
+    private List<GalleryItem> parentGalleryItems;
 
     public MediaItem(){}
     public MediaItem(String title, String extention, String type, LocalDateTime loadDate){

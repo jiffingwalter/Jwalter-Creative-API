@@ -18,7 +18,7 @@ import com.jiffingwalter.jwalter_creative_api.entities.GalleryItem;
 import com.jiffingwalter.jwalter_creative_api.services.GalleryItemService;
 
 @RestController
-@RequestMapping("api/v1/get-gallery-items")
+@RequestMapping("api/v1/gallery-item")
 public class GalleryItemController {
     private final GalleryItemService galleryItemService;
 
@@ -28,13 +28,13 @@ public class GalleryItemController {
 
     /** API - Get all current gallery items in the GalleryItem table */
     @CrossOrigin(origins = "http://localhost:4200/")
-    @GetMapping
+    @GetMapping("get")
     public List<GalleryItem> getGalleryItems() {
         return galleryItemService.getAllGalleryItems();
     }
 
     /** API - Get all current gallery items in the GalleryItem table */
-    @GetMapping("{id}")
+    @GetMapping("get/{id}")
     public ResponseEntity<GalleryItem> getGalleryItemById(@PathVariable UUID id){
         Optional<GalleryItem> result = galleryItemService.getGalleryItemById(id);
         if (result.isPresent())
@@ -44,7 +44,7 @@ public class GalleryItemController {
     }
 
     /** API - Accept a gallery item and insert a new record */
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity<GalleryItem> addNewGalleryItem(@RequestBody GalleryItem newGalleryItem) {
         System.out.println(newGalleryItem.toString());
         return ResponseEntity.ok(this.galleryItemService.insertGalleryItem(newGalleryItem));
