@@ -3,7 +3,7 @@ package com.jiffingwalter.jwalter_creative_api.controllers;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jiffingwalter.jwalter_creative_api.dtos.GalleryItemDTO;
 import com.jiffingwalter.jwalter_creative_api.entities.GalleryItem;
+import com.jiffingwalter.jwalter_creative_api.mappers.GalleryItemMapper;
 import com.jiffingwalter.jwalter_creative_api.services.GalleryItemService;
 
 @RestController
@@ -29,51 +31,29 @@ public class GalleryItemController {
     /** API - Get all current gallery items in the GalleryItem table */
     @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("get")
-    public List<GalleryItem> getGalleryItems() {
-        return galleryItemService.getAllGalleryItems();
+    public List<GalleryItemDTO> getGalleryItems() {
+        List<GalleryItem> itemDTOs = galleryItemService.getAllGalleryItems();
+        return itemDTOs.stream()
+            .map(GalleryItemMapper::toDTO)
+            .collect(Collectors.toList());
     }
 
-    /** API - Get all current gallery items in the GalleryItem table */
+    /** API - Get a single gallery item in the GalleryItem table */
+    @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("get/{id}")
-    public ResponseEntity<GalleryItem> getGalleryItemById(@PathVariable UUID id){
+    public ResponseEntity<GalleryItemDTO> getGalleryItemById(@PathVariable UUID id){
         Optional<GalleryItem> result = galleryItemService.getGalleryItemById(id);
-        if (result.isPresent())
-            return ResponseEntity.ok(result.get());
+        if (result.isPresent()){
+            GalleryItemDTO resultDTO = GalleryItemMapper.toDTO(result.get());
+            return ResponseEntity.ok(resultDTO);
+        }
         else
             return ResponseEntity.notFound().build();
     }
 
-    /** API - Accept a gallery item and insert a new record */
+    /** API - Accept a list of gallery items and insert a new record */
     @PostMapping("create")
-    public ResponseEntity<GalleryItem> addNewGalleryItem(@RequestBody GalleryItem newGalleryItem) {
-        System.out.println(newGalleryItem.toString());
-        return ResponseEntity.ok(this.galleryItemService.insertGalleryItem(newGalleryItem));
+    public ResponseEntity<List<GalleryItem>> addNewGalleryItem(@RequestBody List<GalleryItemDTO> newGalleryItem) {
+        return ResponseEntity.ok(this.galleryItemService.insertGalleryItems(newGalleryItem));
     }
-
-    /** API to generate test items and then return them in a response call */
-    public List<GalleryItem> testInsert() {
-        List<GalleryItem> response = List.of(
-                new GalleryItem(
-                        "Gallery item 1",
-                        "Sample description 1",
-                        LocalDateTime.of(2025, 03, 01, 0, 0, 0),
-                        LocalDateTime.of(2025, 03, 01, 0, 0, 0)
-                        ),
-                new GalleryItem(
-                        "Gallery item 2",
-                        "Sample description 2",
-                        LocalDateTime.of(2025, 04, 01, 0, 0, 0),
-                        LocalDateTime.of(2025, 04, 01, 0, 0, 0)
-                        ),
-                new GalleryItem(
-                        "Gallery item 3",
-                        "Sample description 3",
-                        LocalDateTime.of(2025, 05, 01, 0, 0, 0),
-                        LocalDateTime.of(2025, 05, 01, 0, 0, 0)
-                        )
-                        );
-
-        return response;
-    }
-
 }

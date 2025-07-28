@@ -28,12 +28,6 @@ public class MediaItem {
     private List<GalleryItem> parentGalleryItems;
 
     public MediaItem(){}
-    public MediaItem(String title, String extention, String type, LocalDateTime loadDate){
-        this.title = title;
-        this.extention = extention;
-        this.type = type;
-        this.loadDate = loadDate;
-    }
 
     public UUID getId(){
         return this.id;

@@ -3,6 +3,7 @@ package com.jiffingwalter.jwalter_creative_api.entities;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
 import java.time.LocalDateTime;
 
 import jakarta.persistence.CollectionTable;
@@ -25,6 +26,7 @@ public class GalleryItem {
     private UUID id;
 
     private String title;
+    @Column(length = 2048)
     private String description;
     private LocalDateTime loadDate;
     private LocalDateTime postDate;
@@ -43,12 +45,6 @@ public class GalleryItem {
     private List<String> tags;
 
     public GalleryItem(){}
-    public GalleryItem(String title, String description, LocalDateTime loadDate, LocalDateTime postDate){
-        this.title = title;
-        this.description = description;
-        this.loadDate = loadDate;
-        this.postDate = postDate;
-    }
 
     public UUID getId(){
         return this.id;
@@ -56,29 +52,47 @@ public class GalleryItem {
     public UUID setId(UUID id){
         return this.id = id;
     }
+
     public String getTitle(){
         return this.title;
     }
     public String setTitle(String title){
         return this.title = title;
     }
+
     public String getDescription(){
         return this.description;
     }
     public String setDescription(String description){
         return this.description = description;
     }
+
     public LocalDateTime getLoadDate(){
         return this.loadDate;
     }
     public LocalDateTime setLoadDate(LocalDateTime loadDate){
         return this.loadDate = loadDate;
     }
+
     public LocalDateTime getPostDate(){
         return this.postDate;
     }
     public LocalDateTime setPostDate(LocalDateTime postDate){
         return this.postDate = postDate;
+    }
+
+    public List<MediaItem> getContent(){
+        return this.content;
+    }
+    public List<MediaItem> setContent(List<MediaItem> content){
+        return this.content = content;
+    }
+    
+    public List<String> getTags(){
+        return this.tags;
+    }
+    public List<String> setTags(List<String> tags){
+        return this.tags = tags;
     }
 
     @Override
