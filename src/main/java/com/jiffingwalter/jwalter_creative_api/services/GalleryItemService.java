@@ -1,6 +1,5 @@
 package com.jiffingwalter.jwalter_creative_api.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jiffingwalter.jwalter_creative_api.dtos.GalleryItemDTO;
 import com.jiffingwalter.jwalter_creative_api.entities.GalleryItem;
+import com.jiffingwalter.jwalter_creative_api.mappers.GalleryItemMapper;
 import com.jiffingwalter.jwalter_creative_api.repositories.GalleryItemRepository;
 
 @Service
@@ -25,17 +25,11 @@ public class GalleryItemService {
 
     public List<GalleryItem> insertGalleryItems(List<GalleryItemDTO> newGalleryItems) {
         List<GalleryItem> newEntities = newGalleryItems.stream().map(
-                itemDTO -> {
-                    GalleryItem itemEntity = new GalleryItem();
-                    itemEntity.setTitle(itemDTO.getTitle());
-                    itemEntity.setDescription(itemDTO.getDescription());
-                    itemEntity.setPostDate((itemDTO.getPostDate().isEmpty())? LocalDateTime.now() : LocalDateTime.parse(itemDTO.getPostDate() ));
-                    itemEntity.setLoadDate(LocalDateTime.now());
-                    return itemEntity;
+                galleryItemDTO -> {
+                    return GalleryItemMapper.toEntity(galleryItemDTO);
                 }
             ).toList();
-        // TODO: see about automatically inserting media items and tags here...
-        
+
         return this.galleryItemRepository.saveAll(newEntities);
     }
 

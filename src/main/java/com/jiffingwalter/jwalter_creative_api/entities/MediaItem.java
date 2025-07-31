@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +27,11 @@ public class MediaItem {
 
     @ManyToMany(mappedBy = "content")
     private List<GalleryItem> parentGalleryItems;
+
+    @PrePersist
+    protected void onCreate(){
+        this.loadDate = LocalDateTime.now();
+    }
 
     public MediaItem(){}
 

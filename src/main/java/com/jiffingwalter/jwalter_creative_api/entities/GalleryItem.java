@@ -6,9 +6,8 @@ import java.util.UUID;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.CollectionTable;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,18 +31,24 @@ public class GalleryItem {
     private LocalDateTime loadDate;
     private LocalDateTime postDate;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "gallery_item_media",
         joinColumns = @JoinColumn(name = "gallery_item_id"),
-        inverseJoinColumns = @JoinColumn(name = "media_item_id")
-    )
+        inverseJoinColumns = @JoinColumn(name = "media_item_id"))
     private List<MediaItem> content;
 
-    @ElementCollection
-    @CollectionTable(name = "gallery_item_tags", joinColumns = @JoinColumn(name = "gallery_item_id"))
-    @Column(name = "tag")
-    private List<String> tags;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+        name = "gallery_item_tags", 
+        joinColumns = @JoinColumn(name = "gallery_item_id"),
+        inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<Tag> tags;
+
+    @PrePersist
+    protected void onCreate(){
+        this.loadDate = LocalDateTime.now();
+    }
 
     public GalleryItem(){}
 
@@ -88,10 +94,10 @@ public class GalleryItem {
         return this.content = content;
     }
     
-    public List<String> getTags(){
+    public List<Tag> getTags(){
         return this.tags;
     }
-    public List<String> setTags(List<String> tags){
+    public List<Tag> setTags(List<Tag> tags){
         return this.tags = tags;
     }
 
@@ -105,12 +111,14 @@ public class GalleryItem {
             Objects.equals(title, that.title) &&
             Objects.equals(description, that.description) && 
             Objects.equals(loadDate, that.loadDate) && 
-            Objects.equals(postDate, that.postDate)
+            Objects.equals(postDate, that.postDate) &&
+            Objects.equals(content, that.content) &&
+            Objects.equals(tags, that.tags)
             );
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(id, title, description, loadDate, postDate);
+        return Objects.hash(id, title, description, content, tags, loadDate, postDate);
     }
 }
