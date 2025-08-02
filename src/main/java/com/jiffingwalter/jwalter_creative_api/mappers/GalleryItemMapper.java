@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import com.jiffingwalter.jwalter_creative_api.dtos.GalleryItemDTO;
 import com.jiffingwalter.jwalter_creative_api.dtos.MediaDTO;
-import com.jiffingwalter.jwalter_creative_api.dtos.TagDTO;
 import com.jiffingwalter.jwalter_creative_api.entities.GalleryItem;
 import com.jiffingwalter.jwalter_creative_api.entities.MediaItem;
 import com.jiffingwalter.jwalter_creative_api.entities.Tag;
@@ -18,9 +17,9 @@ public class GalleryItemMapper {
                 return MediaItemMapper.toDTO(mediaEntity);
                 }
             ).collect(Collectors.toList());
-        List<TagDTO> tagDTOs = galleryItemEntity.getTags().stream().map(
+        List<String> tagList = galleryItemEntity.getTags().stream().map(
             tagEntity -> {
-                return TagMapper.toDTO(tagEntity);
+                return tagEntity.getName();
                 }
             ).collect(Collectors.toList());
 
@@ -30,7 +29,7 @@ public class GalleryItemMapper {
             galleryItemEntity.getDescription(), 
             galleryItemEntity.getPostDate().toString(), 
             contentDTOs, 
-            tagDTOs
+            tagList
         );
     }
     public static GalleryItem toEntity(GalleryItemDTO galleryItemDTO){
@@ -40,15 +39,16 @@ public class GalleryItemMapper {
         galleryItemEntity.setPostDate((galleryItemDTO.getPostDate().isEmpty())? LocalDateTime.now() : LocalDateTime.parse(galleryItemDTO.getPostDate() ));
         List<MediaItem> mediaEntities = galleryItemDTO.getContent().stream().map(
             mediaEntity -> {
-                //TODO: check for duplicates here
                 return MediaItemMapper.toEntity(mediaEntity);
             }
         ).toList();
         galleryItemEntity.setContent(mediaEntities);
         List<Tag> tagEntities = galleryItemDTO.getTags().stream().map(
-            tagEntity -> {
-                //TODO: check for duplicates here
-                return TagMapper.toEntity(tagEntity);
+            tag -> {
+                //TODO: check for duplicates here...?
+                Tag tagEntity = new Tag();
+                tagEntity.setName(tag);
+                return tagEntity;
             }
         ).toList();
         galleryItemEntity.setTags(tagEntities);

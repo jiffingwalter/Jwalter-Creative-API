@@ -9,9 +9,9 @@ public class GalleryItemDTO {
     private String description;
     private String postDate;
     private List<MediaDTO> content;
-    private List<TagDTO> tags;
+    private List<String> tags;
 
-    public GalleryItemDTO(UUID id, String title, String description, String postDate, List<MediaDTO> content, List<TagDTO> tags){
+    public GalleryItemDTO(UUID id, String title, String description, String postDate, List<MediaDTO> content, List<String> tags){
         this.id = id;
         this.title = title;
         this.description = description;
@@ -55,10 +55,10 @@ public class GalleryItemDTO {
         return this.content = content;
     }
     
-    public List<TagDTO> getTags(){
+    public List<String> getTags(){
         return this.tags;
     }
-    public List<TagDTO> setTags(List<TagDTO> tags){
+    public List<String> setTags(List<String> tags){
         return this.tags = tags;
     }
 }
