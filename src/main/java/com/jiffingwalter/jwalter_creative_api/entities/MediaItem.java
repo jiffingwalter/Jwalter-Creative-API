@@ -23,6 +23,7 @@ public class MediaItem {
     private String title;
     private String extention;
     private String type;
+    //private String refUrl; // <-- build this out once integrated with cdn
     private LocalDateTime loadDate;
 
     @ManyToMany(mappedBy = "content")

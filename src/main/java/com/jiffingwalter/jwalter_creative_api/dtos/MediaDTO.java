@@ -7,6 +7,7 @@ public class MediaDTO {
     private String title;
     private String extention;
     private String type;
+    //private String refUrl; // <-- build this out once integrated with cdn
 
     public MediaDTO(UUID id, String title, String extention, String type){
         this.id = id;

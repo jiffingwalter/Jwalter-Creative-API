@@ -52,6 +52,7 @@ public class GalleryItemController {
     }
 
     /** API - Accept a list of gallery items and insert a new record */
+    // TODO: lock this down with authentication...
     @PostMapping("create")
     public ResponseEntity<List<GalleryItem>> addNewGalleryItem(@RequestBody List<GalleryItemDTO> newGalleryItem) {
         return ResponseEntity.ok(this.galleryItemService.insertGalleryItems(newGalleryItem));

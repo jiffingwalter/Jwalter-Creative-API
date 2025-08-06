@@ -24,6 +24,7 @@ public class GalleryItemService {
     }
 
     public List<GalleryItem> insertGalleryItems(List<GalleryItemDTO> newGalleryItems) {
+        // eventually: here, for each media item in the request; make a call to file CDN to upload the media items and put each url in the media entity
         List<GalleryItem> newEntities = newGalleryItems.stream().map(
                 galleryItemDTO -> {
                     return GalleryItemMapper.toEntity(galleryItemDTO);
